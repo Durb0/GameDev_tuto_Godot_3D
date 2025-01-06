@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://bc4ni220un4j2"]
+
+[ext_resource type="PackedScene" uid="uid://ctdj8yjh8q546" path="res://scenes/player.tscn" id="1_70cgu"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mmcqd"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_uf3wp"]
+sky_material = SubResource("ProceduralSkyMaterial_mmcqd")
+
+[sub_resource type="Environment" id="Environment_dcc08"]
+background_mode = 2
+sky = SubResource("Sky_uf3wp")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_30buy"]
+albedo_color = Color(1, 0.32, 0.32, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fg1v0"]
+albedo_color = Color(0.18, 0.221, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jkuvl"]
+albedo_color = Color(1, 1, 0.12, 1)
+
+[node name="Level" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_dcc08")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Flour" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+use_collision = true
+size = Vector3(30, 8, 5)
+material = SubResource("StandardMaterial3D_30buy")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 15)
+
+[node name="LaunchPad" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0.5, 0)
+use_collision = true
+size = Vector3(3, 1, 3)
+material = SubResource("StandardMaterial3D_fg1v0")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.5, 0)
+use_collision = true
+size = Vector3(3, 1, 3)
+material = SubResource("StandardMaterial3D_jkuvl")
+
+[node name="Player" parent="." instance=ExtResource("1_70cgu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.68805, 0)
