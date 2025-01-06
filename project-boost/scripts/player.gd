@@ -1,14 +1,13 @@
-extends Node3D
-
-var rotation_speed = 3
+extends RigidBody3D
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("ui_accept"):
-		position.y += 10 * delta
+		apply_central_force(basis.y * delta * 1000)
 		
 	if Input.is_action_pressed("ui_left"):
-		rotate_z(delta * rotation_speed)
-	elif Input.is_action_pressed("ui_right"):
-		rotate_z(-delta * rotation_speed)
+		apply_torque(Vector3.MODEL_FRONT * 100 * delta)
+		
+	if Input.is_action_pressed("ui_right"):
+		apply_torque(Vector3.MODEL_REAR * 100 * delta)
 		
