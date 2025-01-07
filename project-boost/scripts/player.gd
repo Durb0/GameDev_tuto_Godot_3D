@@ -1,9 +1,6 @@
 extends RigidBody3D
 class_name Player
 
-signal landed
-signal crashed
-
 @export_range(700, 2000) var thurst: int = 1000
 @export_range(5, 1000) var torque_thrust: int = 200
 
@@ -22,8 +19,12 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("Goal"):
-		print("gg")
-		landed.emit()
+		land_sequence()
 	elif body.is_in_group("Hazard"):
-		print("boom")
-		crashed.emit()
+		crash_sequence()
+		
+func crash_sequence() -> void:
+	get_tree().reload_current_scene()
+	
+func land_sequence() -> void:
+	get_tree().quit()
