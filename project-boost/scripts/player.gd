@@ -4,6 +4,8 @@ class_name Player
 @export_range(700, 2000) var thurst: int = 1000
 @export_range(5, 1000) var torque_thrust: int = 200
 
+var is_transitioning: bool = false
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("boost"):
@@ -18,14 +20,26 @@ func _process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node) -> void:
-	if body.is_in_group("Goal"):
-		land_sequence(body.file_path)
-	
-	if body.is_in_group("Hazard"):
-		crash_sequence()
+	if !is_transitioning:
+		if body.is_in_group("Goal"):
+			land_sequence(body.file_path)
+		
+		if body.is_in_group("Hazard"):
+			crash_sequence()
 		
 func crash_sequence() -> void:
-	get_tree().reload_current_scene()
+	lock()
+	var tween = create_tween()
+	tween.tween_interval(1.0)
+	tween.tween_callback(get_tree().reload_current_scene)
 	
 func land_sequence(next_level_file:String) -> void:
-	get_tree().change_scene_to_file(next_level_file)
+	lock()
+	var tween = create_tween()
+	tween.tween_interval(1.0)
+	tween.tween_callback(get_tree().change_scene_to_file.bind(next_level_file))
+	
+func lock() -> void:
+	set_process(false)
+	is_transitioning = true
+	
