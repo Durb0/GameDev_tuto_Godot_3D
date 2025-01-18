@@ -4,6 +4,9 @@ class_name Player
 @export_range(700, 2000) var thurst: int = 1000
 @export_range(5, 1000) var torque_thrust: int = 200
 
+@onready var explosion_audio: AudioStreamPlayer3D = $ExplosionAudio
+@onready var success_audio: AudioStreamPlayer3D = $SuccessAudio
+
 var is_transitioning: bool = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -28,18 +31,20 @@ func _on_body_entered(body: Node) -> void:
 			crash_sequence()
 		
 func crash_sequence() -> void:
-	lock()
+	lock_controls()
+	explosion_audio.play()
 	var tween = create_tween()
-	tween.tween_interval(1.0)
+	tween.tween_interval(2.5)
 	tween.tween_callback(get_tree().reload_current_scene)
 	
 func land_sequence(next_level_file:String) -> void:
-	lock()
+	lock_controls()
+	success_audio.play()
 	var tween = create_tween()
-	tween.tween_interval(1.0)
+	tween.tween_interval(2.5)
 	tween.tween_callback(get_tree().change_scene_to_file.bind(next_level_file))
 	
-func lock() -> void:
+func lock_controls() -> void:
 	set_process(false)
 	is_transitioning = true
 	
