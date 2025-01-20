@@ -6,6 +6,7 @@ class_name Player
 
 @onready var explosion_audio: AudioStreamPlayer3D = $ExplosionAudio
 @onready var success_audio: AudioStreamPlayer3D = $SuccessAudio
+@onready var rocket_audio: AudioStreamPlayer3D = $RocketAudio
 
 var is_transitioning: bool = false
 
@@ -13,6 +14,10 @@ var is_transitioning: bool = false
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("boost"):
 		apply_central_force(basis.y * delta * thurst)
+		if(!rocket_audio.playing):
+			rocket_audio.play()
+	elif rocket_audio.playing:
+		rocket_audio.stop()
 		
 	if Input.is_action_pressed("torque_left"):
 		apply_torque(Vector3.MODEL_FRONT * torque_thrust * delta)
@@ -47,4 +52,5 @@ func land_sequence(next_level_file:String) -> void:
 func lock_controls() -> void:
 	set_process(false)
 	is_transitioning = true
+	rocket_audio.stop()
 	
