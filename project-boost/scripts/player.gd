@@ -10,6 +10,8 @@ class_name Player
 @onready var booster_particles: GPUParticles3D = $BoosterParticles
 @onready var right_booster_particles: GPUParticles3D = $RightBoosterParticles
 @onready var left_booster_particles: GPUParticles3D = $LeftBoosterParticles
+@onready var explosion_particles: GPUParticles3D = $ExplosionParticles
+@onready var success_particles: GPUParticles3D = $SuccessParticles
 
 var is_transitioning: bool = false
 var boosters: Array[Booster] = []
@@ -83,6 +85,7 @@ func _on_body_entered(body: Node) -> void:
 func crash_sequence() -> void:
 	lock_controls()
 	explosion_audio.play()
+	explosion_particles.emitting = true
 	var tween = create_tween()
 	tween.tween_interval(2.5)
 	tween.tween_callback(get_tree().reload_current_scene)
@@ -90,6 +93,7 @@ func crash_sequence() -> void:
 func land_sequence(next_level_file:String) -> void:
 	lock_controls()
 	success_audio.play()
+	success_particles.emitting = true
 	var tween = create_tween()
 	tween.tween_interval(2.5)
 	tween.tween_callback(get_tree().change_scene_to_file.bind(next_level_file))
