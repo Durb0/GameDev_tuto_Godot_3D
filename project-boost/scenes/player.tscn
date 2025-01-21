@@ -1,16 +1,41 @@
-[gd_scene load_steps=10 format=3 uid="uid://ctdj8yjh8q546"]
+[gd_scene load_steps=16 format=3 uid="uid://ctdj8yjh8q546"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_03xar"]
 [ext_resource type="AudioStream" uid="uid://b3yac6hijbaac" path="res://assets/audio/SFX - Death Explosion.ogg" id="2_f8wkm"]
 [ext_resource type="AudioStream" uid="uid://buwbcaas4vcfo" path="res://assets/audio/SFX - Success.ogg" id="3_tbm82"]
 [ext_resource type="AudioStream" uid="uid://c4mhxsqjwtkpq" path="res://assets/audio/SFX - Main engine thrust.ogg" id="4_l8wl2"]
 [ext_resource type="PackedScene" uid="uid://ux6ivcx1ovdp" path="res://scenes/Particles/booster_particles.tscn" id="5_0h0nq"]
-[ext_resource type="PackedScene" path="res://scenes/Particles/explosion_particles.tscn" id="6_65bw6"]
-[ext_resource type="PackedScene" path="res://scenes/Particles/success_particles.tscn" id="7_0mib6"]
+[ext_resource type="PackedScene" uid="uid://dcecb8hw7dbrv" path="res://scenes/Particles/explosion_particles.tscn" id="6_65bw6"]
+[ext_resource type="PackedScene" uid="uid://jfwajmrh6ca7" path="res://scenes/Particles/success_particles.tscn" id="7_0mib6"]
+[ext_resource type="Material" uid="uid://bdvt3ll0res7i" path="res://Materials/skin.tres" id="8_o013y"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_k2wfu"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_nbkfu"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_sfpox"]
+material = ExtResource("8_o013y")
+top_radius = 0.2
+bottom_radius = 0.2
+height = 1.75
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lhvlg"]
+albedo_color = Color(1, 0.563, 0.43, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_jkitp"]
+material = SubResource("StandardMaterial3D_lhvlg")
+radius = 0.18
+height = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_06yb0"]
+material = ExtResource("8_o013y")
+radius = 0.3
+height = 0.6
+
+[sub_resource type="TorusMesh" id="TorusMesh_h6xu0"]
+material = ExtResource("8_o013y")
+inner_radius = 0.1
+outer_radius = 0.25
 
 [node name="Player" type="RigidBody3D"]
 axis_lock_linear_z = true
@@ -23,6 +48,7 @@ angular_damp = 3.0
 script = ExtResource("1_03xar")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("CylinderMesh_k2wfu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -53,5 +79,26 @@ emitting = false
 
 [node name="SuccessParticles" parent="." instance=ExtResource("7_0mib6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.125, 0)
+mesh = SubResource("CylinderMesh_sfpox")
+
+[node name="Cokpit" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+mesh = SubResource("CapsuleMesh_jkitp")
+skeleton = NodePath("../..")
+
+[node name="CouilleGauche" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, -0.575, 0)
+mesh = SubResource("SphereMesh_06yb0")
+
+[node name="CouilleDroite" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, -0.575, 0)
+mesh = SubResource("SphereMesh_06yb0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+mesh = SubResource("TorusMesh_h6xu0")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
