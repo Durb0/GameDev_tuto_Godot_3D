@@ -1,0 +1,80 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmeld0e2x4a2p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_30buy"]
+albedo_color = Color(1, 0.32, 0.32, 1)
+
+[node name="Flour" type="CSGBox3D" groups=["Hazard"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+use_collision = true
+size = Vector3(30, 8, 5)
+material = SubResource("StandardMaterial3D_30buy")
+
+[node name="Wall" type="CSGBox3D" parent="."]
+transform = Transform3D(0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0, 1, -17, 5, 0)
+size = Vector3(4, 10, 4)
+material = SubResource("StandardMaterial3D_30buy")
+
+[node name="Wall2" type="CSGBox3D" parent="."]
+transform = Transform3D(0.866026, 0.5, 0, -0.5, 0.866026, 0, 0, 0, 1, 16, 3.34668, 0)
+size = Vector3(4, 10, 4)
+material = SubResource("StandardMaterial3D_30buy")
+
+[node name="Wall3" type="CSGBox3D" parent="."]
+transform = Transform3D(0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0, 1, -15, 12.5693, 0)
+size = Vector3(4, 10, 4)
+material = SubResource("StandardMaterial3D_30buy")
+
+[node name="Wall4" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.965926, 0.258819, 0, -0.258819, -0.965926, 0, 0, 0, 1, 18, 11.5693, 0)
+size = Vector3(4, 10, 4)
+material = SubResource("StandardMaterial3D_30buy")
+
+[node name="Ceiling" type="CSGBox3D" parent="."]
+transform = Transform3D(0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 0, 0, 1, -8, 18.5693, 0)
+size = Vector3(4, 10, 4)
+material = SubResource("StandardMaterial3D_30buy")
+
+[node name="Ceiling2" type="CSGBox3D" parent="."]
+transform = Transform3D(0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 0, 0, 1, 2, 18.5693, 0)
+size = Vector3(4, 10, 4)
+material = SubResource("StandardMaterial3D_30buy")
+
+[node name="Ceiling3" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.5, 0.866025, 0, -0.866026, -0.5, 0, 0, 0, 1, 12, 18.5693, 0)
+size = Vector3(4, 10, 4)
+material = SubResource("StandardMaterial3D_30buy")
+
+[node name="Back" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.707107, 0.707107, 0, -0.707107, -0.707107, 0, 0, 0, 1, 12, 5.56927, -4)
+size = Vector3(4, 10, 4)
+material = SubResource("StandardMaterial3D_30buy")
+
+[node name="Back2" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.866025, -0.5, 0, 0.5, -0.866025, 0, 0, 0, 1, -7, 5.56927, -4)
+size = Vector3(4, 10, 4)
+material = SubResource("StandardMaterial3D_30buy")
+
+[node name="Back3" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.965926, -0.258819, 0, 0.258819, -0.965926, 0, 0, 0, 1, 1, 0.569271, -4)
+size = Vector3(4, 10, 4)
+material = SubResource("StandardMaterial3D_30buy")
+
+[node name="Back4" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.965926, -0.258819, 0, 0.258819, -0.965926, 0, 0, 0, 1, -11, 2.56927, -4)
+size = Vector3(4, 10, 4)
+material = SubResource("StandardMaterial3D_30buy")
+
+[node name="Back5" type="CSGBox3D" parent="."]
+transform = Transform3D(-1, 2.98023e-08, 0, -5.96046e-08, -1, 0, 0, 0, 1, 15, 5.56927, -4)
+size = Vector3(4, 10, 4)
+material = SubResource("StandardMaterial3D_30buy")
+
+[node name="Front" type="CSGBox3D" parent="."]
+transform = Transform3D(-1, 2.98023e-08, 0, -5.96046e-08, -1, 0, 0, 0, 1, 15, 1.569, 4.5)
+size = Vector3(4, 10, 4)
+material = SubResource("StandardMaterial3D_30buy")
+
+[node name="Front2" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.707107, -0.707107, 0, 0.707107, -0.707107, 0, 0, 0, 1, -3, 0.569, 4.5)
+size = Vector3(4, 10, 4)
+material = SubResource("StandardMaterial3D_30buy")

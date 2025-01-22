@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bc4ni220un4j2"]
+[gd_scene load_steps=10 format=3 uid="uid://bc4ni220un4j2"]
 
 [ext_resource type="Script" path="res://Level/landing_pad.gd" id="1_654cs"]
+[ext_resource type="PackedScene" uid="uid://cmeld0e2x4a2p" path="res://Background.tscn" id="1_ddm1a"]
 [ext_resource type="PackedScene" uid="uid://ctdj8yjh8q546" path="res://scenes/player.tscn" id="1_umaqh"]
+[ext_resource type="PackedScene" uid="uid://c1n4sc2r7s67y" path="res://camera.tscn" id="3_7hy5b"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mmcqd"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -15,9 +17,6 @@ background_mode = 2
 sky = SubResource("Sky_uf3wp")
 tonemap_mode = 2
 glow_enabled = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_30buy"]
-albedo_color = Color(1, 0.32, 0.32, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fg1v0"]
 albedo_color = Color(0.18, 0.221, 1, 1)
@@ -34,11 +33,7 @@ environment = SubResource("Environment_dcc08")
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Flour" type="CSGBox3D" parent="." groups=["Hazard"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
-use_collision = true
-size = Vector3(30, 8, 5)
-material = SubResource("StandardMaterial3D_30buy")
+[node name="Flour" parent="." instance=ExtResource("1_ddm1a")]
 
 [node name="LaunchPad" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0.5, 0)
@@ -54,8 +49,7 @@ material = SubResource("StandardMaterial3D_jkuvl")
 script = ExtResource("1_654cs")
 file_path = "res://Level/level_2.tscn"
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 15)
+[node name="Camera3D" parent="." instance=ExtResource("3_7hy5b")]
 
 [node name="Player" parent="." instance=ExtResource("1_umaqh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 2, 0)
