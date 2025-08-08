@@ -71,6 +71,14 @@ path_joined = false
 
 [node name="Enemy" parent="Path3D" instance=ExtResource("2_5x8ra")]
 transform = Transform3D(0.99778, 0, -0.0665187, 0, 1, 0, 0.0665187, 0, 0.99778, -14, 0, 14)
+speed = 20.0
+damage = 5
+
+[node name="Enemy2" parent="Path3D" instance=ExtResource("2_5x8ra")]
+transform = Transform3D(0.999769, 0, 0.0212701, 0, 1, 0, -0.0212701, 0, 0.999769, -14.2306, 0, 9.00587)
+progress = 5.0
+speed = 20.0
+damage = 5
 
 [node name="Base" parent="." instance=ExtResource("3_o2j4u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -6)
